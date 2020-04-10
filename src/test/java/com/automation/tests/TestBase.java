@@ -46,7 +46,7 @@ public abstract class TestBase {
     @BeforeMethod
     public void setup(){
         driver = Driver.getDriver();
-        driver.get(ConfigurationReader.getProperty("qa2"));
+        driver.get(ConfigurationReader.getProperty("qa1"));
         driver.manage().window().maximize();
         BrowserUtilities.waitForPageToLoad(10);
     }
