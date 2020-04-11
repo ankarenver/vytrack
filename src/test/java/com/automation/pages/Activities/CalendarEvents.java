@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class CalendarEvents extends PageBase {
 
 
@@ -20,6 +22,12 @@ public class CalendarEvents extends PageBase {
     @FindBy(partialLinkText = "Create Calendar")
     private WebElement createCalendarBtn;
 
+    @FindBy(xpath = "//a[@href='#']//i[@class='fa-cog hide-text']")
+    private WebElement gridBtn;
+
+    @FindBy(xpath = "//thead[@class='grid-header']//th[2]")
+    private WebElement tableHeaderName;
+
 
     public void hoverOverThreeDots(){
         BrowserUtilities.waitForPageToLoad(10);
@@ -29,5 +37,25 @@ public class CalendarEvents extends PageBase {
     public Boolean isIconVisible(String icon){
         return driver.findElement(By.xpath("//li[@class='launcher-item']//a[@title='"+icon+"']")).isDisplayed();
     }
+
+    public void deselectAllOptionsInGrid(){
+        BrowserUtilities.waitForPageToLoad(10);
+        gridBtn.click();
+
+        List<WebElement> allNames = driver.findElements(By.xpath("//tbody[@class='ui-sortable']//tr"));
+        List<WebElement> allClick = driver.findElements(By.xpath("//tbody[@class='ui-sortable']//tr//td[3]//input"));
+
+        for (int i = 0; i <allNames.size() ; i++) {
+            if ((!allNames.get(i).getText().equals("Title"))&&allClick.get(i).isSelected()){
+                allClick.get(i).click(); // un_click it
+            }
+        }
+    }
+
+    public String getTableHeaderName(){
+        return tableHeaderName.getText();
+    }
+
+
 
 }

@@ -5,10 +5,10 @@ import com.automation.pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TestsNo01 extends TestBase{
+public class Tests extends TestBase{
 
     @Test
-    public void Test_01(){
+    public void test_01(){
         extentTest = extentReports.createTest("first test");
         LoginPage loginPage = new LoginPage();
         loginPage.login();
@@ -21,6 +21,20 @@ public class TestsNo01 extends TestBase{
         extentTest.pass("first test pass!!");
     }
 
+    @Test
+    public void test_02(){
+        extentTest = extentReports.createTest("second test");
+        LoginPage loginPage = new LoginPage();
+        loginPage.login();
+        CalendarEvents a = new CalendarEvents();
+        a.navigateTo("Activities","Calendar Events");
+        a.deselectAllOptionsInGrid();
+        Assert.assertEquals(a.getTableHeaderName(),"TITLE");
+        extentTest.pass("first test pass!!");
+    }
 
+    @Test
+    public void test_03(){
 
+    }
 }
